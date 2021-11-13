@@ -16,6 +16,5 @@ module.exports = async function calculate_profit(starting_wipe = 30895, number_o
     for(let week_counter = starting_week; week_counter <= number_of_weeks; week_counter++) {
         current_wipe = (staking * current_wipe) + weekly_wipe_from_nfts()
     }
-
-    console.log(`$ ${Number(current_wipe * current_price).toFixed(2)}`)
+    return Number(current_wipe * current_price).toFixed(2);
 }
