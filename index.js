@@ -1,6 +1,10 @@
 const calculate_profit_using_current_price = require('./calculate_profit.js');
 
-calculate_profit_using_current_price('wipemyass', 393000, 10, 1, 107, 25, 2, 'usd').then(calculation => {
+
+let starting_wipe = 31095
+let number_of_nfts = 25
+
+calculate_profit_using_current_price('wipemyass', starting_wipe, 10, 1, number_of_nfts, 25, 2, 'usd').then(calculation => {
   if (calculation.error) {
     console.error(error);
     console.log(`Total $${calculation.symbol.toUpperCase()}:\t ${calculation.total_token}`)

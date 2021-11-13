@@ -1,4 +1,4 @@
-const CoinGecko = require('coingecko-api');
+const CoinGecko = require('./coingecko-api');
 const CoinGeckoClient = new CoinGecko();
 
 module.exports = function calculate_profit_using_current_price(coin_id = 'wipemyass', starting_token = 30895, staking_reward = 1.1, staking_reward_weekly_interval = 1, number_of_nfts = 25, number_of_weeks = 25, starting_week = 1, denomination = 'usd') {
