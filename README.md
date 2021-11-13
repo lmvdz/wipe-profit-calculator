@@ -1,1 +1,1 @@
-"# wipe-profit-calculator" 
+# wipe-profit-calculator
