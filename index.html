@@ -42,6 +42,8 @@
                     this.output.push(`Total $${calculation.symbol.toUpperCase()} (min - max):\t ${calculation.least_token} - ${calculation.most_token}`)
                     this.output.push(`Price (${calculation.denomination.toUpperCase()}):\t\t\t $ ${calculation.current_price}`)
                     this.output.push(`Total ${calculation.denomination.toUpperCase()} (min - max):\t\t $ ${calculation.profit_least} - ${calculation.profit_most}`)
+                }).catch(error => {
+                    console.error(error)
                 })
             },
             calculate_profit_using_current_price(coin_id = 'wipemyass', starting_token = 30895, staking_reward = 1.1, staking_reward_weekly_interval = 1, number_of_nfts = 25, number_of_weeks = 25, starting_week = 1, denomination = 'usd') {
@@ -67,30 +69,37 @@
                     }
                     
                     const weekly_token_from_nfts = () => {
-                        return (3000 * number_of_nfts)
+                        return 3000 * number_of_nfts
                     }
 
                     const weekly_token_50k = () => {
-                        return (2000)
+                        return 2000
                     }
                     
-                    let least_amount_of_wipe = 0 + starting_token;
+                    let least_amount_of_wipe = Number(0 + starting_token);
                     for(let week_counter = starting_week; week_counter <= number_of_weeks; week_counter++) {
                         if (week_counter % staking_reward_weekly_interval === 0) {
                             least_amount_of_wipe *= (1 + (1 / staking_reward))
                         }
                         least_amount_of_wipe += weekly_token_from_nfts()
-                        if (least_amount_of_wipe > 50000)
+                        if (least_amount_of_wipe > 50000) {
                             least_amount_of_wipe += weekly_token_50k()
+                        }
+                            
                     }
-                    let most_amount_of_wipe = 0 + starting_token;
+                    let most_amount_of_wipe = Number(0 + starting_token);
+                    
                     for(let week_counter = starting_week; week_counter <= number_of_weeks; week_counter++) {
                         most_amount_of_wipe += weekly_token_from_nfts()
-                        if (most_amount_of_wipe > 50000)
+                        
+                        if (most_amount_of_wipe > 50000) {
                             most_amount_of_wipe += weekly_token_50k()
+                        }
+                            
                         if (week_counter % staking_reward_weekly_interval === 0) {
                             most_amount_of_wipe *= (1 + (1 / staking_reward))
                         }
+                        console.log(most_amount_of_wipe)
                     }
 
                     axios.get('https://api.coingecko.com/api/v3/coins/'+coin_id).then(response => {
